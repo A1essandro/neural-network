@@ -4,6 +4,7 @@ namespace Neural;
 
 
 use Closure;
+use Generator;
 use Neural\Abstraction\ILayer;
 use Neural\Abstraction\Node;
 
@@ -25,17 +26,19 @@ class Layer implements ILayer
     /**
      * @param Node $node
      *
-     * @return void
+     * @return $this
      */
     public function addNode(Node $node)
     {
         $this->nodes[] = $node;
+
+        return $this;
     }
 
     /**
      * @param Closure|null $filter
      *
-     * @return Node[]|Neuron[]|Input[]|Bias[] Returns Generator!
+     * @return Generator|Node[]|Neuron[]|Input[]|Bias[] Returns Generator!
      */
     public function getNodes(Closure $filter = null)
     {
