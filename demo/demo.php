@@ -12,7 +12,8 @@ $t = new Neural\BackpropagationTeacher($p); //Teacher with backpropagation algor
 $learningResult = $t->teachKit(
     [[1, 0], [0, 1], [1, 1], [0, 0]], //kit for learning
     [[1], [1], [0], [0]], //appropriate expectations
-    0.3 //error
+    0.3, //error
+    10000 //max iterations
 );
 
 if ($learningResult != -1) {
