@@ -1,0 +1,23 @@
+{
+  "name": "a1essandro/neural-network",
+  "description": "Artificial neural network",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "A1essandro",
+      "email": "alexander.yermakov.1990@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.7.*",
+    "satooshi/php-coveralls": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neural\\": "src/"
+    }
+  }
+}
