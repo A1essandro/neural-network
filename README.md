@@ -35,13 +35,16 @@ git clone https://github.com/A1essandro/neural-network
 ###XOR example:
 
 ```php
+use Neural\BackpropagationTeacher;
+use Neural\MultilayerPerceptron;
+
 require_once '../vendor/autoload.php';
 
 //Creation neural network, with 2 input-neurons, one hidden layer with 2 neurons and one output neuron:
-$p = new Neural\Network([2, 2, 1]); //You may add more hidden layers or neurons to layers: [2, 3, 2, 1]
+$p = new MultilayerPerceptron([2, 2, 1]); //You may add more hidden layers or neurons to layers: [2, 3, 2, 1]
 $p->generateSynapses(); //automatically add synapses
 
-$t = new Neural\BackpropagationTeacher($p); //Teacher with backpropagation algorithm
+$t = new BackpropagationTeacher($p); //Teacher with backpropagation algorithm
 
 //Teach until it learns
 $learningResult = $t->teachKit(

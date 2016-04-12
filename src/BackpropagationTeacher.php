@@ -15,11 +15,11 @@ class BackpropagationTeacher implements ITeacher
     protected $theta;
 
     /**
-     * @var Network
+     * @var MultilayerPerceptron
      */
     protected $perceptron;
 
-    public function __construct(Network $perceptron, $theta = 1)
+    public function __construct(MultilayerPerceptron $perceptron, $theta = 1)
     {
         $this->perceptron = $perceptron;
         $this->theta = $theta;

@@ -1,18 +1,18 @@
 <?php
 
-use Neural\Network;
+use Neural\MultilayerPerceptron;
 
 class NetworkTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Network;
+     * @var MultilayerPerceptron;
      */
     protected $network;
 
     protected function setUp()
     {
-        $this->network = new Network([2, 2, 1]);
+        $this->network = new MultilayerPerceptron([2, 2, 1]);
     }
 
     public function testLayersCount()

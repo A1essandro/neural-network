@@ -3,17 +3,12 @@
 namespace Neural;
 
 
-use Neural\Abstraction\IInput;
-use Neural\Abstraction\ILayer;
-use Neural\Abstraction\IOutput;
+use Generator;
+use Neural\Abstraction\LayeredNetwork;
+use Neural\Abstraction\Node;
 
-class Network implements IInput, IOutput
+class MultilayerPerceptron extends LayeredNetwork
 {
-
-    /**
-     * @var ILayer[]
-     */
-    protected $layers = [];
 
     /**
      * @param array $layersOptions
@@ -30,7 +25,7 @@ class Network implements IInput, IOutput
             if ($lastLayer != $key) {
                 $layer->addNode(new Bias());
             }
-            $this->layers[$key] = $layer;
+            $this->addLayer($layer);
         }
     }
 
@@ -59,21 +54,12 @@ class Network implements IInput, IOutput
     public function output()
     {
         $result = [];
-        $lastLayer = $this->layers[count($this->layers) - 1];
+        $lastLayer = $this->getOutputLayer();
         foreach ($lastLayer->getNodes() as $neuron) {
             $result[] = $neuron->output();
         }
 
         return $result;
-    }
-
-    /**
-     * @param Neuron $fromNeuron
-     * @param Neuron $toNeuron
-     */
-    public function addSynapse($fromNeuron, $toNeuron)
-    {
-        $toNeuron->addSynapse(new Synapse($fromNeuron));
     }
 
     public function trace()
@@ -98,39 +84,19 @@ class Network implements IInput, IOutput
             foreach ($nextLayer->getNodes() as $nextNeuron) {
                 foreach ($curLayer->getNodes() as $curNeuron) {
                     if (!$nextNeuron instanceof Bias) {
-                        $this->addSynapse($curNeuron, $nextNeuron);
+                        $curNeuron->addSynapse(new Synapse($nextNeuron));
                     }
                 }
             }
         }
     }
 
+    /**
+     * @return Generator|Node[]
+     */
     protected function getOutputNeurons()
     {
-        return $this->layers[count($this->layers) - 1]->getNodes();
-    }
-
-    /**
-     * @return ILayer
-     */
-    public function getOutputLayer()
-    {
-        return $this->layers[count($this->layers) - 1];
-    }
-
-    public function getLayers()
-    {
-        return $this->layers;
-    }
-
-    /**
-     * @return ILayer[] Returns Generator!
-     */
-    public function getLayersReverse()
-    {
-        for ($i = count($this->layers) - 1; $i >= 0; $i--) {
-            yield $this->layers[$i];
-        }
+        return $this->getOutputLayer()->getNodes();
     }
 
 }

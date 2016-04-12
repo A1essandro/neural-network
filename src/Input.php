@@ -28,4 +28,5 @@ class Input extends Node implements IInput
     {
         return $this->value;
     }
+
 }
