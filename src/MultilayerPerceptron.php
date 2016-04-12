@@ -3,9 +3,7 @@
 namespace Neural;
 
 
-use Generator;
 use Neural\Abstraction\LayeredNetwork;
-use Neural\Abstraction\Node;
 
 class MultilayerPerceptron extends LayeredNetwork
 {
@@ -15,51 +13,24 @@ class MultilayerPerceptron extends LayeredNetwork
      */
     public function __construct(array $layersOptions)
     {
-        $lastLayer = count($layersOptions) - 1;
         foreach ($layersOptions as $key => $neuronsInLayer) {
             $layer = new Layer(
                 $neuronsInLayer, $key
                 ? Layer::NODE_TYPE_NEURON
                 : Layer::NODE_TYPE_INPUT
             );
-            if ($lastLayer != $key) {
-                $layer->addNode(new Bias());
-            }
             $this->addLayer($layer);
         }
+        $this->addBiasNodes();
     }
 
-    /**
-     * @param array $input
-     *
-     * @return $this
-     */
-    public function input($input)
+    protected function addBiasNodes()
     {
-        $firstLayer = $this->layers[0];
-        $filter = function ($node) {
-            return $node instanceof Input;
-        };
-
-        foreach ($firstLayer->getNodes($filter) as $key => $neuron) {
-            $neuron->input($input[$key]);
+        foreach ($this->layers as $layer) {
+            if ($layer != $this->getOutputLayer()) {
+                $layer->addNode(new Bias());
+            }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function output()
-    {
-        $result = [];
-        $lastLayer = $this->getOutputLayer();
-        foreach ($lastLayer->getNodes() as $neuron) {
-            $result[] = $neuron->output();
-        }
-
-        return $result;
     }
 
     public function trace()
@@ -69,8 +40,10 @@ class MultilayerPerceptron extends LayeredNetwork
             echo 'L' . $lk . ': ' . PHP_EOL;
             foreach ($layer->getNodes() as $nk => $neuron) {
                 echo "\t" . 'N' . $nk . ': ' . $neuron->getValue() . PHP_EOL;
-                foreach ($neuron->getSynapses() as $sk => $synapse) {
-                    echo "\t\tS" . $sk . ': ' . $synapse->getWeight() . PHP_EOL;
+                if ($neuron instanceof Neuron) {
+                    foreach ($neuron->getSynapses() as $sk => $synapse) {
+                        echo "\t\tS" . $sk . ': ' . $synapse->getWeight() . PHP_EOL;
+                    }
                 }
             }
         }
@@ -84,19 +57,11 @@ class MultilayerPerceptron extends LayeredNetwork
             foreach ($nextLayer->getNodes() as $nextNeuron) {
                 foreach ($curLayer->getNodes() as $curNeuron) {
                     if (!$nextNeuron instanceof Bias) {
-                        $curNeuron->addSynapse(new Synapse($nextNeuron));
+                        $nextNeuron->addSynapse(new Synapse($curNeuron));
                     }
                 }
             }
         }
-    }
-
-    /**
-     * @return Generator|Node[]
-     */
-    protected function getOutputNeurons()
-    {
-        return $this->getOutputLayer()->getNodes();
     }
 
 }

@@ -42,7 +42,7 @@ class Synapse implements IOutput
      */
     protected function generateRandomWeight()
     {
-        return 1 / rand(5, 50) * rand(0, 1) ? -1 : 1;
+        return 1 / rand(5, 25) * (rand(0, 1) ? -1 : 1);
     }
 
     /**

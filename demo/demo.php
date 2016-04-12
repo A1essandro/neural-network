@@ -9,6 +9,9 @@ require_once '../vendor/autoload.php';
 $p = new MultilayerPerceptron([2, 2, 1]); //You may add more hidden layers or neurons to layers: [2, 3, 2, 1]
 $p->generateSynapses(); //automatically add synapses
 
+$p->trace();
+exit;
+
 $t = new BackpropagationTeacher($p); //Teacher with backpropagation algorithm
 
 //Teach until it learns
