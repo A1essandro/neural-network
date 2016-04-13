@@ -31,17 +31,6 @@ class InputNodeTest extends PHPUnit_Framework_TestCase
      *
      * @param $value float
      */
-    public function testValue($value)
-    {
-        $this->node->input($value);
-        $this->assertEquals($value, $this->node->getValue());
-    }
-
-    /**
-     * @dataProvider providerSetInput
-     *
-     * @param $value float
-     */
     public function testOutput($value)
     {
         $this->node->input($value);

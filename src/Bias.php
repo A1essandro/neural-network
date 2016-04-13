@@ -14,9 +14,4 @@ class Bias extends Node implements IOutput
         return 1;
     }
 
-    function getValue()
-    {
-        return 1;
-    }
-
 }

@@ -16,7 +16,7 @@ class Input extends Node implements IInput
      */
     public function input($input)
     {
-        $this->value = $input;
+        $this->calculatedOutput = $input;
     }
 
     /**
@@ -26,7 +26,7 @@ class Input extends Node implements IInput
      */
     public function output()
     {
-        return $this->value;
+        return $this->calculatedOutput;
     }
 
 }

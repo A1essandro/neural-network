@@ -40,13 +40,13 @@ class BackpropagationTeacher implements ITeacher
                 continue;
             }
             foreach ($layer->getNodes($nFilter) as $nk => $neuron) {
-                $neuronOutput = $neuron->getValue();
+                $neuronOutput = $neuron->output();
                 $sigma = !empty($childLayer)
                     ? $neuronOutput * (1 - $neuronOutput) * $this->getChildSigmas($sigmas, $neuron)
                     : $neuronOutput * (1 - $neuronOutput) * ($expectation[$nk] - $neuronOutput);
                 $sigmas[] = new NeuronsSigma($neuron, $sigma);
                 foreach ($neuron->getSynapses() as $synapse) {
-                    $synapse->recalculateWeight($this->theta * $sigma * $synapse->getInputNode()->getValue());
+                    $synapse->recalculateWeight($this->theta * $sigma * $synapse->getInputNode()->output());
                 }
             }
 
