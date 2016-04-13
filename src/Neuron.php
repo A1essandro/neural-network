@@ -3,6 +3,7 @@
 namespace Neural;
 
 
+use Neural\Abstraction\IActivationFunction;
 use Neural\Abstraction\IOutput;
 use Neural\Abstraction\Node;
 
@@ -15,15 +16,23 @@ class Neuron extends Node implements IOutput
     protected $synapses = [];
 
     /**
+     * @var IActivationFunction
+     */
+    protected $activationFunction;
+
+    const DEFAULT_ACTIVATION_FUNCTION = LogisticFunction::class;
+
+    /**
      * Add link to the previous layer neuron
      *
-     * @param Synapse $synapse
-     *
-     * @return void
+     * @param Synapse             $synapse
+     * @param IActivationFunction $activation
      */
-    public function addSynapse(Synapse $synapse)
+    public function addSynapse(Synapse $synapse, IActivationFunction $activation = null)
     {
         $this->synapses[] = $synapse;
+        $defaultActivation = self::DEFAULT_ACTIVATION_FUNCTION;
+        $this->activationFunction = $activation ?: new $defaultActivation;
     }
 
     /**
@@ -46,7 +55,7 @@ class Neuron extends Node implements IOutput
         foreach ($this->synapses as $synapse) {
             $sum += $synapse->output();
         }
-        return $this->calculatedOutput = $this->activation($sum);
+        return $this->calculatedOutput = $this->activationFunction->calculateValue($sum);
     }
 
     public function refresh()
