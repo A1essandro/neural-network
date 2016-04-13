@@ -15,6 +15,13 @@ class Neuron extends Node implements IOutput
     protected $synapses = [];
 
     /**
+     * Is value calculated for current input (performance optimization)
+     *
+     * @var null|float
+     */
+    protected $calculated = null;
+
+    /**
      * Add link to the previous layer neuron
      *
      * @param Synapse $synapse
@@ -36,21 +43,34 @@ class Neuron extends Node implements IOutput
         return $this->synapses;
     }
 
-    function getValue()
+    public function getValue()
     {
         if (count($this->synapses)) {
-            return round(1 / (1 + exp(-$this->value)), 5);
+            return $this->activation();
         }
         return $this->value;
     }
 
-    function output()
+    public function output()
     {
-        $this->value = 0;
+        if ($this->calculated !== null) {
+            return $this->calculated;
+        }
+
         foreach ($this->synapses as $synapse) {
             $this->value += $synapse->output();
         }
-        return round(1 / (1 + exp(-$this->value)), 5);
+        return $this->calculated = $this->activation();
     }
 
+    public function refresh()
+    {
+        $this->value = 0;
+        $this->calculated = null;
+    }
+
+    protected function activation()
+    {
+        return round(1 / (1 + exp(-$this->value)), 5);
+    }
 }

@@ -3,8 +3,10 @@
 namespace Neural\Abstraction;
 
 
+use Closure;
 use Generator;
 use Neural\Input;
+use Neural\Neuron;
 
 abstract class LayeredNetwork implements INetwork
 {
@@ -61,12 +63,19 @@ abstract class LayeredNetwork implements INetwork
     public function input($input)
     {
         $firstLayer = $this->layers[0];
-        $filter = function ($node) {
+        $inputsFilter = function ($node) {
             return $node instanceof Input;
         };
+        $neuronsFilter = function ($node) {
+            return $node instanceof Neuron;
+        };
 
-        foreach ($firstLayer->getNodes($filter) as $key => $neuron) {
+        foreach ($firstLayer->getNodes($inputsFilter) as $key => $neuron) {
             $neuron->input($input[$key]);
+        }
+
+        foreach($this->getNodes($neuronsFilter) as $neuron) {
+            $neuron->refresh();
         }
 
         return $this;
@@ -92,6 +101,20 @@ abstract class LayeredNetwork implements INetwork
     protected function getOutputNeurons()
     {
         return $this->getOutputLayer()->getNodes();
+    }
+
+    /**
+     * @param Closure $filter
+     *
+     * @return Generator|INode[]|Neuron[]
+     */
+    public function getNodes(Closure $filter = null)
+    {
+        foreach ($this->layers as $layer) {
+            foreach ($layer->getNodes($filter) as $node) {
+                yield $node;
+            }
+        }
     }
 
 }
