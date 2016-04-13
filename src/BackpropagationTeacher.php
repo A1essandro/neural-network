@@ -74,7 +74,7 @@ class BackpropagationTeacher implements ITeacher
         return $sigma;
     }
 
-    public function teachKit(array $kit, array $expectations, $error = 0.5, $maxIterations = 10000)
+    public function teachKit(array $kit, array $expectations, $error = 0.3, $maxIterations = 10000)
     {
         if (count($kit) != count($expectations)) {
             throw new Exception("Kit and expectations quantities must be equals");

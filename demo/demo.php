@@ -10,7 +10,6 @@ $p = new MultilayerPerceptron([2, 2, 1]); //You may add more hidden layers or ne
 $p->generateSynapses(); //automatically add synapses
 
 $p->trace();
-exit;
 
 $t = new BackpropagationTeacher($p); //Teacher with backpropagation algorithm
 
@@ -28,3 +27,5 @@ if ($learningResult != -1) {
     echo '0,0: ' . round($p->input([0, 0])->output()[0]) . PHP_EOL;
     echo '1,1: ' . round($p->input([1, 1])->output()[0]) . PHP_EOL;
 }
+
+$p->trace();
