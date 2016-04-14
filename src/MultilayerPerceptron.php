@@ -4,6 +4,8 @@ namespace Neural;
 
 
 use Neural\Abstraction\LayeredNetwork;
+use Neural\Node\Neuron;
+use Neural\Node\Bias;
 
 class MultilayerPerceptron extends LayeredNetwork
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Neural;
+namespace Neural\Node;
 
 
 use Neural\Abstraction\IActivationFunction;
-use Neural\Abstraction\IOutput;
-use Neural\Abstraction\Node;
+use Neural\LogisticFunction;
+use Neural\Synapse;
 
-class Neuron extends Node implements IOutput
+class Neuron implements INode
 {
 
     /**
@@ -19,6 +19,11 @@ class Neuron extends Node implements IOutput
      * @var IActivationFunction
      */
     protected $activationFunction;
+
+    /**
+     * @var float
+     */
+    protected $calculatedOutput = 0;
 
     const DEFAULT_ACTIVATION_FUNCTION = LogisticFunction::class;
 

@@ -5,8 +5,9 @@ namespace Neural\Abstraction;
 
 use Closure;
 use Generator;
-use Neural\Input;
-use Neural\Neuron;
+use Neural\Node\INode;
+use Neural\Node\Input;
+use Neural\Node\Neuron;
 
 abstract class LayeredNetwork implements INetwork
 {
@@ -96,7 +97,7 @@ abstract class LayeredNetwork implements INetwork
     }
 
     /**
-     * @return Generator|Node[]
+     * @return Generator|INode[]
      */
     protected function getOutputNeurons()
     {

@@ -6,23 +6,24 @@ namespace Neural\Abstraction;
 use Closure;
 use Generator;
 use Neural\Bias;
-use Neural\Input;
-use Neural\Neuron;
+use Neural\Node\INode;
+use Neural\Node\Input;
+use Neural\Node\Neuron;
 
 interface ILayer
 {
 
     /**
-     * @param Node $node
+     * @param INode $node
      *
      * @return $this
      */
-    function addNode(Node $node);
+    function addNode(INode $node);
 
     /**
      * @param Closure $filter
      *
-     * @return Generator|Node[]|Neuron[]|Input[]|Bias[] Returns Generator!
+     * @return Generator|Neuron[]|Input[]|Bias[] Returns Generator!
      */
     function getNodes(Closure $filter = null);
 

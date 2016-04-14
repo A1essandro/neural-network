@@ -1,13 +1,14 @@
 <?php
 
-namespace Neural;
+namespace Neural\Node;
 
 
 use Neural\Abstraction\IInput;
-use Neural\Abstraction\Node;
 
-class Input extends Node implements IInput
+class Input implements INode, IInput
 {
+
+    protected $input = 0;
 
     /**
      * @param $input
@@ -16,7 +17,7 @@ class Input extends Node implements IInput
      */
     public function input($input)
     {
-        $this->calculatedOutput = $input;
+        $this->input = $input;
     }
 
     /**
@@ -26,7 +27,7 @@ class Input extends Node implements IInput
      */
     public function output()
     {
-        return $this->calculatedOutput;
+        return $this->input;
     }
 
 }

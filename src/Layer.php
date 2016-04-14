@@ -6,13 +6,15 @@ namespace Neural;
 use Closure;
 use Generator;
 use Neural\Abstraction\ILayer;
-use Neural\Abstraction\Node;
+use Neural\Node\INode;
+use Neural\Node\Input;
+use Neural\Node\Neuron;
 
 class Layer implements ILayer
 {
 
-    const NODE_TYPE_NEURON = 'Neural\Neuron';
-    const NODE_TYPE_INPUT = 'Neural\Input';
+    const NODE_TYPE_NEURON = Neuron::class;
+    const NODE_TYPE_INPUT = Input::class;
 
     protected $nodes = [];
 
@@ -24,11 +26,11 @@ class Layer implements ILayer
     }
 
     /**
-     * @param Node $node
+     * @param INode $node
      *
      * @return $this
      */
-    public function addNode(Node $node)
+    public function addNode(INode $node)
     {
         $this->nodes[] = $node;
 
@@ -38,7 +40,7 @@ class Layer implements ILayer
     /**
      * @param Closure|null $filter
      *
-     * @return Generator|Node[]|Neuron[]|Input[]|Bias[] Returns Generator!
+     * @return Generator|INode[]|Neuron[]|Input[]|Bias[] Returns Generator!
      */
     public function getNodes(Closure $filter = null)
     {

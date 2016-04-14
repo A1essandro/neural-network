@@ -4,7 +4,7 @@ namespace Neural;
 
 
 use Neural\Abstraction\IOutput;
-use Neural\Abstraction\Node;
+use Neural\Node\INode;
 
 class Synapse implements IOutput
 {
@@ -15,15 +15,15 @@ class Synapse implements IOutput
     protected $weight;
 
     /**
-     * @var Node
+     * @var INode
      */
     protected $fromNode;
 
     /**
-     * @param Node $fromNode
+     * @param INode $fromNode
      * @param null $weight
      */
-    public function __construct(Node $fromNode, $weight = null)
+    public function __construct(INode $fromNode, $weight = null)
     {
         $this->setWeight($weight);
         $this->fromNode = $fromNode;
@@ -70,7 +70,7 @@ class Synapse implements IOutput
     }
 
     /**
-     * @return Node
+     * @return INode
      */
     public function getInputNode()
     {

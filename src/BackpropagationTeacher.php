@@ -5,6 +5,7 @@ namespace Neural;
 
 use Exception;
 use Neural\Abstraction\ITeacher;
+use Neural\Node\Neuron;
 
 class BackpropagationTeacher implements ITeacher
 {
