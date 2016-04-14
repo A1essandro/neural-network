@@ -3,10 +3,10 @@
 namespace Neural;
 
 
-use Neural\Abstraction\IOutput;
+use Neural\Abstraction\ISynapse;
 use Neural\Node\INode;
 
-class Synapse implements IOutput
+class Synapse implements ISynapse
 {
 
     /**
@@ -56,7 +56,7 @@ class Synapse implements IOutput
     /**
      * @param float $delta
      */
-    public function recalculateWeight($delta)
+    public function changeWeight($delta)
     {
         $this->weight += $delta;
     }
@@ -72,7 +72,7 @@ class Synapse implements IOutput
     /**
      * @return INode
      */
-    public function getInputNode()
+    function getParentNode()
     {
         return $this->fromNode;
     }

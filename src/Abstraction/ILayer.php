@@ -5,7 +5,7 @@ namespace Neural\Abstraction;
 
 use Closure;
 use Generator;
-use Neural\Bias;
+use Neural\Node\Bias;
 use Neural\Node\INode;
 use Neural\Node\Input;
 use Neural\Node\Neuron;

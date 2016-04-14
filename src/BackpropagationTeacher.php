@@ -47,7 +47,7 @@ class BackpropagationTeacher implements ITeacher
                     : $neuronOutput * (1 - $neuronOutput) * ($expectation[$nk] - $neuronOutput);
                 $sigmas[] = new NeuronsSigma($neuron, $sigma);
                 foreach ($neuron->getSynapses() as $synapse) {
-                    $synapse->recalculateWeight($this->theta * $sigma * $synapse->getInputNode()->output());
+                    $synapse->changeWeight($this->theta * $sigma * $synapse->getParentNode()->output());
                 }
             }
 
@@ -67,7 +67,7 @@ class BackpropagationTeacher implements ITeacher
         $sigma = 0;
         foreach ($sigmas as $neuronWithSigma) {
             foreach ($neuronWithSigma->neuron->getSynapses() as $synapse) {
-                if ($synapse->getInputNode() == $forNeuron) {
+                if ($synapse->getParentNode() == $forNeuron) {
                     $sigma += $synapse->getWeight() * $neuronWithSigma->sigma;
                 }
             }

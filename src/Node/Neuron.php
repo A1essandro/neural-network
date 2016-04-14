@@ -4,6 +4,7 @@ namespace Neural\Node;
 
 
 use Neural\Abstraction\IActivationFunction;
+use Neural\Abstraction\ISynapse;
 use Neural\LogisticFunction;
 use Neural\Synapse;
 
@@ -30,10 +31,10 @@ class Neuron implements INode
     /**
      * Add link to the previous layer neuron
      *
-     * @param Synapse             $synapse
+     * @param ISynapse            $synapse
      * @param IActivationFunction $activation
      */
-    public function addSynapse(Synapse $synapse, IActivationFunction $activation = null)
+    public function addSynapse(ISynapse $synapse, IActivationFunction $activation = null)
     {
         $this->synapses[] = $synapse;
         $defaultActivation = self::DEFAULT_ACTIVATION_FUNCTION;
@@ -43,7 +44,7 @@ class Neuron implements INode
     /**
      * Getting all synapses to nodes of the previous layer
      *
-     * @return Synapse[]
+     * @return ISynapse[]
      */
     public function getSynapses()
     {

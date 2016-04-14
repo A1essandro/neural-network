@@ -5,7 +5,8 @@ namespace Neural\Abstraction;
 
 use Closure;
 use Generator;
-use Neural\Neuron;
+use Neural\Node\INode;
+use Neural\Node\Neuron;
 
 interface INetwork extends IInput, IOutput
 {
