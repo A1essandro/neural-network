@@ -1,9 +1,9 @@
 <?php
 
 use Neural\Abstraction\ILayer;
-use Neural\Bias;
 use Neural\Layer;
-use Neural\Neuron;
+use Neural\Node\Bias;
+use Neural\Node\Neuron;
 
 class LayerTest extends PHPUnit_Framework_TestCase
 {

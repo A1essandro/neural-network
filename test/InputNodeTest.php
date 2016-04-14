@@ -1,6 +1,6 @@
 <?php
 
-use Neural\Input;
+use Neural\Node\Input;
 
 class InputNodeTest extends PHPUnit_Framework_TestCase
 {
