@@ -36,7 +36,7 @@ class BackpropagationTeacher implements ITeacher
         $childLayer = null;
         $sigmas = [];
 
-        foreach ($this->perceptron->getLayersReverse() as $layer) {
+        foreach (array_reverse($this->perceptron->getLayers()) as $layer) {
             if ($this->perceptron->getLayers()[0] == $layer) {
                 continue;
             }

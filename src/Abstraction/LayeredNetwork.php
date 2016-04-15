@@ -35,16 +35,6 @@ abstract class LayeredNetwork implements INetwork
     }
 
     /**
-     * @return Generator|ILayer[] Returns Generator!
-     */
-    public function getLayersReverse()
-    {
-        for ($i = count($this->layers) - 1; $i >= 0; $i--) {
-            yield $this->layers[$i];
-        }
-    }
-
-    /**
      * @param ILayer $layer
      *
      * @return $this
