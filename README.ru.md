@@ -72,3 +72,39 @@ if ($learningResult != -1) {
 1,1: 0
 */
 ```
+
+####Ручное конфигурирование нейронной сети
+
+```php
+$p = new MultilayerPerceptron([2, 2, 1]);
+
+//Равнозначно:
+
+$p = new MultilayerPerceptron();
+$p->addLayer(new Layer())->toLastLayer()
+    ->addNode(new Input())
+    ->addNode(new Input())
+    ->addNode(new Bias());
+$p->addLayer(new Layer())->toLastLayer()
+    ->addNode(new Neuron())
+    ->addNode(new Neuron())
+    ->addNode(new Bias());
+$p->addLayer(new Layer())->toLastLayer()
+    ->addNode(new Neuron());
+
+//Не забудьте добавить синапсы:
+
+$p->generateSynapses();
+
+//Или Вы можете управлять процессом самостоятельно, добавляя синапсы для каждого нейрона:
+
+$neuronFilter = function($node) {
+    return $node instanceof Neuron;
+};
+
+$secondLayerNeuron = iterator_to_array($p->getLayers()[1]->getNodes($neuronFilter))[0];
+$input = iterator_to_array($p->getLayers()[0]->getNodes())[0];
+$secondLayerNeuron->addSynapse(new Synapse($input));
+
+//и так далее...
+```

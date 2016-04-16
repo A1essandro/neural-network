@@ -18,7 +18,7 @@ class Layer implements ILayer
 
     protected $nodes = [];
 
-    public function __construct($neurons, $nodeTypes = self::NODE_TYPE_NEURON)
+    public function __construct($neurons = 0, $nodeTypes = self::NODE_TYPE_NEURON)
     {
         for ($i = 0; $i < $neurons; $i++) {
             $this->nodes[] = new $nodeTypes();
@@ -51,6 +51,14 @@ class Layer implements ILayer
 
             yield $node;
         }
+    }
+
+    /**
+     * @return INode
+     */
+    public function toLastNode()
+    {
+        return end($this->nodes);
     }
 
 }

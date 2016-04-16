@@ -4,6 +4,7 @@ namespace Neural;
 
 
 use Exception;
+use Neural\Abstraction\ILayer;
 use Neural\Abstraction\ITeacher;
 use Neural\Node\Neuron;
 
@@ -36,6 +37,7 @@ class BackpropagationTeacher implements ITeacher
         $childLayer = null;
         $sigmas = [];
 
+        /** @var ILayer $layer */
         foreach (array_reverse($this->perceptron->getLayers()) as $layer) {
             if ($this->perceptron->getLayers()[0] == $layer) {
                 continue;

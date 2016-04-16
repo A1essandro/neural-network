@@ -27,4 +27,9 @@ interface ILayer
      */
     function getNodes(Closure $filter = null);
 
+    /**
+     * @return INode
+     */
+    function toLastNode();
+
 }

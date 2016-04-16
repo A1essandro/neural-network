@@ -17,16 +17,16 @@ class Synapse implements ISynapse
     /**
      * @var INode
      */
-    protected $fromNode;
+    protected $parentNode;
 
     /**
-     * @param INode $fromNode
-     * @param null $weight
+     * @param INode         $fromNode
+     * @param null|float    $weight
      */
     public function __construct(INode $fromNode, $weight = null)
     {
         $this->setWeight($weight);
-        $this->fromNode = $fromNode;
+        $this->parentNode = $fromNode;
     }
 
     /**
@@ -50,7 +50,7 @@ class Synapse implements ISynapse
      */
     public function output()
     {
-        return $this->weight * $this->fromNode->output();
+        return $this->weight * $this->parentNode->output();
     }
 
     /**
@@ -74,7 +74,7 @@ class Synapse implements ISynapse
      */
     function getParentNode()
     {
-        return $this->fromNode;
+        return $this->parentNode;
     }
 
 }

@@ -108,4 +108,12 @@ abstract class LayeredNetwork implements INetwork
         }
     }
 
+    /**
+     * @return ILayer
+     */
+    public function toLastLayer()
+    {
+        return end($this->layers);
+    }
+
 }
