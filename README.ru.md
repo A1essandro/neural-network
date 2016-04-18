@@ -21,7 +21,7 @@
 
 Используйте команду:
 ```
-composer require a1essandro/neural-network dev-master
+composer require a1essandro/neural-network:dev-master
 ```
 Пакет `neural-network` автоматически скачается в папку `vendors` Вашего проекта
 

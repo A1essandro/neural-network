@@ -21,7 +21,7 @@ See more [getcomposer.org](http://getcomposer.org).
 
 Execute command 
 ```
-composer require a1essandro/neural-network dev-master
+composer require a1essandro/neural-network:dev-master
 ```
 
 ####Method #2: Clone repository
