@@ -65,7 +65,7 @@ abstract class LayeredNetwork implements INetwork
             $neuron->input($input[$key]);
         }
 
-        foreach($this->getNodes($neuronsFilter) as $neuron) {
+        foreach ($this->getNodes($neuronsFilter) as $neuron) {
             $neuron->refresh();
         }
 
@@ -97,15 +97,16 @@ abstract class LayeredNetwork implements INetwork
     /**
      * @param Closure $filter
      *
-     * @return Generator|INode[]|Neuron[]
+     * @return INode[]|Neuron[]
      */
     public function getNodes(Closure $filter = null)
     {
+        $nodes = [];
         foreach ($this->layers as $layer) {
-            foreach ($layer->getNodes($filter) as $node) {
-                yield $node;
-            }
+            $nodes = array_merge($nodes, $layer->getNodes($filter));
         }
+
+        return $nodes;
     }
 
     /**

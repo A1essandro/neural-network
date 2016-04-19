@@ -23,7 +23,7 @@ interface ILayer
     /**
      * @param Closure $filter
      *
-     * @return Generator|Neuron[]|Input[]|Bias[] Returns Generator!
+     * @return Neuron[]|Input[]|Bias[]
      */
     function getNodes(Closure $filter = null);
 

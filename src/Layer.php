@@ -6,6 +6,7 @@ namespace Neural;
 use Closure;
 use Generator;
 use Neural\Abstraction\ILayer;
+use Neural\Node\Bias;
 use Neural\Node\INode;
 use Neural\Node\Input;
 use Neural\Node\Neuron;
@@ -40,17 +41,14 @@ class Layer implements ILayer
     /**
      * @param Closure|null $filter
      *
-     * @return Generator|INode[]|Neuron[]|Input[]|Bias[] Returns Generator!
+     * @return INode[]|Neuron[]|Input[]|Bias[]
      */
     public function getNodes(Closure $filter = null)
     {
-        foreach ($this->nodes as $node) {
-            if ($filter && !$filter($node)) {
-                continue;
-            }
-
-            yield $node;
+        if ($filter) {
+            return array_filter($this->nodes, $filter);
         }
+        return $this->nodes;
     }
 
     /**

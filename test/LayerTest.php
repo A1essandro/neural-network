@@ -31,8 +31,8 @@ class LayerTest extends PHPUnit_Framework_TestCase
             return $node instanceof Neuron;
         };
 
-        $biasNodes = iterator_to_array($this->layer->getNodes($filterGetBias));
-        $neuronNodes = iterator_to_array($this->layer->getNodes($filterGetNeuron));
+        $biasNodes = $this->layer->getNodes($filterGetBias);
+        $neuronNodes = $this->layer->getNodes($filterGetNeuron);
 
         $this->assertEquals(count($biasNodes), 2);
         $this->assertEquals(count($neuronNodes), 3);

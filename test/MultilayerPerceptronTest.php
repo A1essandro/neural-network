@@ -56,22 +56,21 @@ class MultilayerPerceptronTest extends PHPUnit_Framework_TestCase
     {
         $biasNodes = $this->network->getNodes($this->filterBias);
         $inputNodes = $this->network->getNodes($this->filterInput);
-        $this->assertEquals(count(iterator_to_array($biasNodes)), 1);
-        $this->assertEquals(count(iterator_to_array($inputNodes)), 1);
 
-        $biasNodes = $this->network->getNodes($this->filterBias);
-        $this->assertContainsOnlyInstancesOf(Bias::class, iterator_to_array($biasNodes));
+        $this->assertEquals(count($biasNodes), 1);
+        $this->assertEquals(count($inputNodes), 1);
+        $this->assertContainsOnlyInstancesOf(Bias::class, $biasNodes);
     }
 
     public function testInput()
     {
-        foreach( $this->network->getNodes($this->filterInput) as $neuron) {
+        foreach ($this->network->getNodes($this->filterInput) as $neuron) {
             $this->assertEquals($neuron->output(), 0);
         }
 
         $this->network->input([1])->output();
 
-        foreach( $this->network->getNodes($this->filterInput) as $neuron) {
+        foreach ($this->network->getNodes($this->filterInput) as $neuron) {
             $this->assertEquals($neuron->output(), 1);
         }
     }

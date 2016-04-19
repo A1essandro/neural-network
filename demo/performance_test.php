@@ -29,4 +29,5 @@ $epochs = $t->teachKit(
     ) . PHP_EOL;
 $endTime = microtime(true);
 
+echo 'Memory peak usage: ' . round(memory_get_peak_usage() / 1024, 1) . PHP_EOL;
 echo 'Seconds per epoch: ' . round(($endTime - $startTime) / $epochs, 3);
