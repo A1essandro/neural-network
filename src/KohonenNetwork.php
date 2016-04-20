@@ -3,12 +3,13 @@
 namespace Neural;
 
 
+use Neural\Abstraction\ISelfLearning;
 use Neural\Abstraction\LayeredNetwork;
 use Neural\Node\Input;
 use Neural\Node\KohonenNeuron;
 use Neural\Node\Neuron;
 
-class KohonenNetwork extends LayeredNetwork
+class KohonenNetwork extends LayeredNetwork implements ISelfLearning
 {
 
     public function __construct(array $layersConfiguration = null)
@@ -42,7 +43,7 @@ class KohonenNetwork extends LayeredNetwork
 
     public function output()
     {
-        $outputCount = count(iterator_to_array($this->getOutputLayer()->getNodes()));
+        $outputCount = count($this->getOutputLayer()->getNodes());
         $max = -$outputCount;
         $maxIndex = -1;
 
@@ -58,7 +59,7 @@ class KohonenNetwork extends LayeredNetwork
         return $result;
     }
 
-    public function learn($input)
+    public function learn(array $input)
     {
         $result = $this->input($input)->output();
 
@@ -77,22 +78,5 @@ class KohonenNetwork extends LayeredNetwork
             $synapse->changeWeight(0.1 * ($input[$key] - $synapse->getWeight()));
         }
     }
-
-    public function trace()
-    {
-        $this->output();
-        foreach ($this->layers as $lk => $layer) {
-            echo 'L' . $lk . ': ' . PHP_EOL;
-            foreach ($layer->getNodes() as $nk => $neuron) {
-                echo "\t" . 'N' . $nk . ': ' . $neuron->output() . PHP_EOL;
-                if ($neuron instanceof Neuron) {
-                    foreach ($neuron->getSynapses() as $sk => $synapse) {
-                        echo "\t\tS" . $sk . ': ' . $synapse->getWeight() . PHP_EOL;
-                    }
-                }
-            }
-        }
-    }
-
 
 }

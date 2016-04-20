@@ -69,7 +69,7 @@ if ($learningResult != -1) {
 */
 ```
 
-####Manualy configuration of network
+####Manually configuration of network
 
 ```php
 $p = new MultilayerPerceptron([2, 2, 1]);

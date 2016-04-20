@@ -4,7 +4,6 @@ namespace Neural;
 
 
 use Closure;
-use Generator;
 use Neural\Abstraction\ILayer;
 use Neural\Node\Bias;
 use Neural\Node\INode;
@@ -14,12 +13,9 @@ use Neural\Node\Neuron;
 class Layer implements ILayer
 {
 
-    const NODE_TYPE_NEURON = Neuron::class;
-    const NODE_TYPE_INPUT = Input::class;
-
     protected $nodes = [];
 
-    public function __construct($neurons = 0, $nodeTypes = self::NODE_TYPE_NEURON)
+    public function __construct($neurons = 0, $nodeTypes = Neuron::class)
     {
         for ($i = 0; $i < $neurons; $i++) {
             $this->nodes[] = new $nodeTypes();
@@ -48,6 +44,7 @@ class Layer implements ILayer
         if ($filter) {
             return array_filter($this->nodes, $filter);
         }
+
         return $this->nodes;
     }
 
