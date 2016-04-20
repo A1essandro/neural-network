@@ -75,7 +75,7 @@ class KohonenNetwork extends LayeredNetwork implements ISelfLearning
 
         //change winner's weights (move to input vector)
         foreach ($neuron->getSynapses() as $key => $synapse) {
-            $synapse->changeWeight(0.1 * ($input[$key] - $synapse->getWeight()));
+            $synapse->changeWeight(0.15 * ($input[$key] - $synapse->getWeight()));
         }
     }
 

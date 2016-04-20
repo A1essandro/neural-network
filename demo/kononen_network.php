@@ -4,19 +4,24 @@ use Neural\KohonenNetwork;
 
 require_once '../vendor/autoload.php';
 
-$p = new KohonenNetwork([3, 5]);
+$p = new KohonenNetwork([3, 3]);
 $p->generateSynapses();
 
 $data = [];
-for ($x = 0; $x <= 1; $x += 0.5) {
-    for ($y = 0; $y <= 1; $y += 0.5) {
-        for ($z = 0; $z <= 1; $z += 0.5) {
-            $data[] = [$x, $y, $z];
-        }
-    }
+
+//Init group:
+$data[] = [1, 0, 0];
+$data[] = [0, 1, 0];
+$data[] = [0, 0, 1];
+
+for ($i = 0; $i < 1000; $i++) {
+    $data[] = [round(rand(0, 255) / 255, 2), round(rand(0, 255) / 255, 2), round(rand(0, 255) / 255, 2)];
 }
 
-shuffle($data);
+//Control group:
+$data[] = [1, 0.5, 0];
+$data[] = [0, 0.5, 1]; //It should not be equal to the previous
+$data[] = [0, 0.5, 1]; //It should be equal to the previous
 
 for ($i = 0; $i < 100; $i++) {
     foreach ($data as $set) {
@@ -25,5 +30,5 @@ for ($i = 0; $i < 100; $i++) {
 }
 
 foreach ($data as $set) {
-    echo implode(', ', $p->input($set)->output()) . PHP_EOL;
+    echo array_search(1, $p->input($set)->output()) . ':   ' . implode('  ', $set) . PHP_EOL;
 }
