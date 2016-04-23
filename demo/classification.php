@@ -4,11 +4,13 @@ use Neural\KohonenNetwork;
 
 require_once '../vendor/autoload.php';
 
+$start = microtime(true);
+
 $n = new KohonenNetwork([5, 3]);
 $n->generateSynapses();
 
 $forTraining = [];
-for ($i = 0; $i < 50; $i++) {
+for ($i = 0; $i < 75; $i++) {
     $forTraining[] = [rand(80, 100) / 100, rand(80, 100) / 100, rand(80, 100) / 100, rand(80, 100) / 100,
                       rand(80, 100) / 100,];
     $forTraining[] = [rand(5, 50) / 100, rand(5, 50) / 100, rand(5, 50) / 100, rand(5, 50) / 100, rand(5, 50) / 100,];
@@ -33,3 +35,5 @@ for ($i = 0; $i <= 100; $i++) {
 foreach ($students as $name => $student) {
     echo $name . ': ' . array_search(1, $n->input($student)->output()) . PHP_EOL;
 }
+
+echo PHP_EOL . 'Time: ' . round(microtime(true) - $start, 3);

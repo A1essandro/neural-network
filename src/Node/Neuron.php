@@ -29,16 +29,22 @@ class Neuron implements INode
     const DEFAULT_ACTIVATION_FUNCTION = LogisticFunction::class;
 
     /**
+     * @param IActivationFunction|null $activation
+     */
+    public function __construct(IActivationFunction $activation = null)
+    {
+        $defaultActivation = static::DEFAULT_ACTIVATION_FUNCTION;
+        $this->activationFunction = $activation ?: new $defaultActivation;
+    }
+
+    /**
      * Add link to the previous layer neuron
      *
-     * @param ISynapse            $synapse
-     * @param IActivationFunction $activation
+     * @param ISynapse $synapse
      */
-    public function addSynapse(ISynapse $synapse, IActivationFunction $activation = null)
+    public function addSynapse(ISynapse $synapse)
     {
         $this->synapses[] = $synapse;
-        $defaultActivation = self::DEFAULT_ACTIVATION_FUNCTION;
-        $this->activationFunction = $activation ?: new $defaultActivation;
     }
 
     /**
@@ -69,8 +75,4 @@ class Neuron implements INode
         $this->calculatedOutput = 0;
     }
 
-    protected function activation($value)
-    {
-        return round(1 / (1 + exp(-$value)), 5);
-    }
 }
