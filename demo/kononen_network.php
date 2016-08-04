@@ -1,34 +1,43 @@
 <?php
 
+/*
+ * Problem: We have few things, with 3 properties (normalized, from 0 to 1), and 2 boxes for this things.
+ * How to distribute things?
+ */
+
+define('DIVIDER', 50);
+
 use Neural\KohonenNetwork;
 
 require_once '../vendor/autoload.php';
 
-$p = new KohonenNetwork([3, 3]);
+//Our things:
+$control['Thing A'] = [1, 0.5, 0];
+$control['Thing B'] = [0, 0.4, 1]; //Spoiler: this thing should be in different boxes with "Thing A"
+$control['Thing C'] = [0, 0.7, 0.9]; //Spoiler: this thing should be in one box with "Thing B"
+
+$p = new KohonenNetwork([3 /*thing's properties*/, 2 /*our boxes*/]);
 $p->generateSynapses();
 
-$data = [];
-
-//Init group:
-$data[] = [1, 0, 0];
-$data[] = [0, 1, 0];
-$data[] = [0, 0, 1];
-
+//Firstly, learn our network on random things
+$learningData = [];
 for ($i = 0; $i < 1000; $i++) {
-    $data[] = [round(rand(0, 255) / 255, 2), round(rand(0, 255) / 255, 2), round(rand(0, 255) / 255, 2)];
+    $randomProperty1 = round(rand(0, DIVIDER) / DIVIDER, 2); //random value from 0 to 1
+    $randomProperty2 = round(rand(0, DIVIDER) / DIVIDER, 2); //random value from 0 to 1
+    $randomProperty3 = round(rand(0, DIVIDER) / DIVIDER, 2); //random value from 0 to 1
+    $learningData[] = [$randomProperty1, $randomProperty2, $randomProperty3];
 }
 
-//Control group:
-$data[] = [1, 0.5, 0];
-$data[] = [0, 0.5, 1]; //It should not be equal to the previous
-$data[] = [0, 0.5, 1]; //It should be equal to the previous
-
 for ($i = 0; $i < 100; $i++) {
-    foreach ($data as $set) {
+    foreach ($learningData as $set) {
         $p->learn($set);
     }
 }
 
-foreach ($data as $set) {
-    echo array_search(1, $p->input($set)->output()) . ':   ' . implode('  ', $set) . PHP_EOL;
+//define box for every item
+foreach ($control as $thingName => $thingProperties) {
+    //$p->input($thingProperties).. - thing's properties to network, for classificate it
+    //..->output() - network returns array with 2 (for this problem) digits. Index of "1" - it's an index of classification
+    $boxNumber = array_search(1, $p->input($thingProperties)->output()) + 1;
+    echo $thingName . ": to box #" . $boxNumber . PHP_EOL;
 }
