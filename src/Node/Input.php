@@ -8,6 +8,9 @@ use Neural\Abstraction\IInput;
 class Input implements INode, IInput
 {
 
+    /**
+     * @var int input value
+     */
     protected $input = 0;
 
     /**

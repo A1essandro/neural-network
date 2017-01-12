@@ -6,25 +6,22 @@ require_once '../vendor/autoload.php';
 
 $start = microtime(true);
 
-$n = new KohonenNetwork([5, 3]);
+$n = new KohonenNetwork([2, 7]);
 $n->generateSynapses();
 
+$nominals = [1, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2];
+$students = [];
 $forTraining = [];
-for ($i = 0; $i < 75; $i++) {
-    $forTraining[] = [rand(80, 100) / 100, rand(80, 100) / 100, rand(80, 100) / 100, rand(80, 100) / 100,
-                      rand(80, 100) / 100,];
-    $forTraining[] = [rand(5, 50) / 100, rand(5, 50) / 100, rand(5, 50) / 100, rand(5, 50) / 100, rand(5, 50) / 100,];
-    $forTraining[] = [rand(5, 100) / 100, rand(5, 100) / 100, rand(5, 100) / 100, rand(5, 100) / 100,
-                      rand(5, 100) / 100,];
+
+for ($i = 0; $i < 500; $i++) {
+    $forTraining[] = [$nominals[array_rand($nominals)], ($i % 6) * 7];
 }
 
-$students = [
-    'Arya'  => [0.8, 0.6, 0.3, 0.75, 0.7],
-    'Sansa' => [1, 0.9, 0.93, 0.91, 0.95],
-    'John'  => [0.3, 0.2, 0.35, 0.4, 0.23],
-    'Rob'   => [0.55, 0.7, 0.8, 0.5, 0.75],
-    'Bran'  => [0.8, 0.9, 1, 0.94, 0.8]
-];
+for ($i = 0; $i < 50; $i++) {
+    $v = $nominals[array_rand($nominals)];
+    $pow = $i % 6;
+    $students['Resistor ' . ($v * pow(10, $pow))] = [$v, $pow * 7];
+}
 
 for ($i = 0; $i <= 100; $i++) {
     foreach ($forTraining as $student) {
