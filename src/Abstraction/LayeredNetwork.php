@@ -116,21 +116,4 @@ abstract class LayeredNetwork implements INetwork
         return end($this->layers);
     }
 
-
-    public function trace()
-    {
-        $this->output();
-        foreach ($this->layers as $lk => $layer) {
-            echo 'L' . $lk . ': ' . PHP_EOL;
-            foreach ($layer->getNodes() as $nk => $neuron) {
-                echo "\t" . 'N' . $nk . ': ' . $neuron->output() . PHP_EOL;
-                if ($neuron instanceof Neuron) {
-                    foreach ($neuron->getSynapses() as $sk => $synapse) {
-                        echo "\t\tS" . $sk . ': ' . $synapse->getWeight() . PHP_EOL;
-                    }
-                }
-            }
-        }
-    }
-
 }
