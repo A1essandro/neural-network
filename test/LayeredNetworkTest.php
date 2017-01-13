@@ -29,4 +29,12 @@ class LayeredNetworkTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($this->layeredNetwork->getLayers());
     }
 
+    /**
+     * Try to resolve not covered string
+     */
+    public function testAddLayerReturn()
+    {
+        $this->assertInstanceOf(LayeredNetwork::class, $this->layeredNetwork->addLayer(new Layer()));
+    }
+
 }

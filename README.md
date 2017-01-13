@@ -23,6 +23,13 @@ Execute command
 ```
 composer require a1essandro/neural-network ^0.1.0
 ```
+Or add line to `composer.json`
+
+```
+"require": {
+    "require a1essandro/neural-network": "^0.1.0"
+},
+```
 
 ####Method #2: Clone repository
 Execute command 
