@@ -103,4 +103,9 @@ class MultilayerPerceptronTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testOutputNodes()
+    {
+        $this->assertCount(1, $this->network->getOutputLayer()->getNodes());
+    }
+
 }

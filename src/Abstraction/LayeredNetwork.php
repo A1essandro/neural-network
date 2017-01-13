@@ -22,7 +22,6 @@ abstract class LayeredNetwork implements INetwork
      */
     public function getOutputLayer()
     {
-        $this->layers[0]->getNodes();
         return $this->layers[count($this->layers) - 1];
     }
 
