@@ -1,5 +1,6 @@
 <?php
 
+use Neural\BackpropagationTeacher;
 use Neural\Layer;
 use Neural\MultilayerPerceptron;
 use Neural\Node\Bias;
@@ -72,6 +73,33 @@ class MultilayerPerceptronTest extends PHPUnit_Framework_TestCase
 
         foreach ($this->network->getNodes($this->filterInput) as $neuron) {
             $this->assertEquals($neuron->output(), 1);
+        }
+    }
+
+    public function testTeachingXOR()
+    {
+        while (true){
+            $mlp = new MultilayerPerceptron([2, 2, 1]);
+            $mlp->generateSynapses();
+
+            $t = new BackpropagationTeacher($mlp);
+
+            $learningResult = $t->teachKit(
+                [[1, 0], [0, 1], [1, 1], [0, 0]],
+                [[1], [1], [0], [0]],
+                0.3,
+                10000
+            );
+
+            if($learningResult == -1)
+                continue;
+
+            $this->assertEquals(1.0, $mlp->input([1, 0])->output()[0], '', 0.3);
+            $this->assertEquals(1.0, $mlp->input([0, 1])->output()[0], '', 0.3);
+            $this->assertEquals(0.0, $mlp->input([1, 1])->output()[0], '', 0.3);
+            $this->assertEquals(0.0, $mlp->input([0, 0])->output()[0], '', 0.3);
+
+            break;
         }
     }
 
