@@ -1,7 +1,9 @@
 <?php
 
 use Neural\Abstraction\ISynapse;
+use Neural\Layer;
 use Neural\LogisticFunction;
+use Neural\MultilayerPerceptron;
 use Neural\Node\Input;
 use Neural\Node\Neuron;
 use Neural\Synapse;
@@ -44,6 +46,18 @@ class NeuronTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1, $this->slaveNeuron->getSynapses());
         $this->assertInstanceOf(ISynapse::class, $this->slaveNeuron->getSynapses()[0]);
         $this->assertCount(1, $this->slaveNeuron->getSynapses());
+    }
+
+    public function testOutputEquability()
+    {
+        $mlp = new MultilayerPerceptron();
+        $mlp->addLayer(new Layer())
+            ->toLastLayer()->addNode($this->inputNode);
+        $mlp->addLayer(new Layer())
+            ->toLastLayer()->addNode($this->slaveNeuron);
+        $this->slaveNeuron->addSynapse(new Synapse($this->inputNode));
+
+        $this->assertEquals($this->slaveNeuron->output(), $mlp->output()[0]);
     }
 
 }
