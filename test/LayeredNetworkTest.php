@@ -24,4 +24,9 @@ class LayeredNetworkTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($outputLayer === $this->layeredNetwork->getOutputLayer());
     }
 
+    public function testLayersMustBeNotNull()
+    {
+        $this->assertNotNull($this->layeredNetwork->getLayers());
+    }
+
 }

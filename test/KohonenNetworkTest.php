@@ -42,4 +42,11 @@ class KohonenNetworkTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, array_sum($this->network->output()));
     }
 
+    public function testNullConfiguration()
+    {
+        $network = new KohonenNetwork();
+
+        $this->assertCount(0, $network->getLayers());
+    }
+
 }

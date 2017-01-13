@@ -3,6 +3,7 @@
 use Neural\Abstraction\ILayer;
 use Neural\Layer;
 use Neural\Node\Bias;
+use Neural\Node\INode;
 use Neural\Node\Neuron;
 
 class LayerTest extends PHPUnit_Framework_TestCase
@@ -41,5 +42,12 @@ class LayerTest extends PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf(Neuron::class, $neuronNodes);
     }
 
+    public function testLastNode()
+    {
+        /** @var INode $node */
+        $node = $this->getMockForAbstractClass(INode::class);
+        $this->layer->addNode($node);
+        $this->assertTrue($node === $this->layer->toLastNode());
+    }
 
 }

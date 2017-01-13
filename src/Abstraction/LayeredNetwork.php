@@ -15,7 +15,7 @@ abstract class LayeredNetwork implements INetwork
     /**
      * @var ILayer[]
      */
-    protected $layers;
+    protected $layers = [];
 
     /**
      * @return ILayer
