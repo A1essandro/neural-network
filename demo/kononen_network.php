@@ -16,8 +16,8 @@ $control['Thing A'] = [1, 0.5, 0];
 $control['Thing B'] = [0, 0.4, 1]; //Spoiler: this thing should be in different boxes with "Thing A"
 $control['Thing C'] = [0, 0.7, 0.9]; //Spoiler: this thing should be in one box with "Thing B"
 
-$p = new KohonenNetwork([3 /*thing's properties*/, 2 /*our boxes*/]);
-$p->generateSynapses();
+$network = new KohonenNetwork([3 /*thing's properties*/, 2 /*our boxes*/]);
+$network->generateSynapses();
 
 //Firstly, learn our network on random things
 $learningData = [];
@@ -30,7 +30,7 @@ for ($i = 0; $i < 1000; $i++) {
 
 for ($i = 0; $i < 100; $i++) {
     foreach ($learningData as $set) {
-        $p->learn($set);
+        $network->learn($set);
     }
 }
 
@@ -38,6 +38,6 @@ for ($i = 0; $i < 100; $i++) {
 foreach ($control as $thingName => $thingProperties) {
     //$p->input($thingProperties).. - thing's properties to network, for classificate it
     //..->output() - network returns array with 2 (for this problem) digits. Index of "1" - it's an index of classification
-    $boxNumber = array_search(1, $p->input($thingProperties)->output()) + 1;
+    $boxNumber = array_search(1, $network->input($thingProperties)->output()) + 1;
     echo $thingName . ": to box #" . $boxNumber . PHP_EOL;
 }
