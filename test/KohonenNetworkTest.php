@@ -5,36 +5,41 @@ use Neural\KohonenNetwork;
 class KohonenNetworkTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testDemo()
+    /**
+     * @var KohonenNetwork
+     */
+    private $network;
+
+    protected function setUp()
     {
-        $control['A'] = [1, 0.5, 0];
-        $control['B'] = [0, 0.5, 1];
-        $control['C'] = [0, 0.7, 0.9];
-
-        $network = new KohonenNetwork([3, 2]);
-        $network->generateSynapses();
-
-        $learningData = [];
-        for ($i = 0; $i < 1000; $i++) {
-            $randomProperty1 = mt_rand() / mt_getrandmax(); //random value from 0 to 1
-            $randomProperty2 = mt_rand() / mt_getrandmax(); //random value from 0 to 1
-            $randomProperty3 = mt_rand() / mt_getrandmax(); //random value from 0 to 1
-            $learningData[] = [$randomProperty1, $randomProperty2, $randomProperty3];
-        }
-
-        for ($i = 0; $i < 250; $i++) {
-            foreach ($learningData as $set) {
-                $network->learn($set);
-            }
-        }
-
-        $A = $network->input($control['A'])->output();
-        $B = $network->input($control['B'])->output();
-        $C = $network->input($control['C'])->output();
-
-        $this->assertNotEquals($A, $B);
-        $this->assertNotEquals($A, $C);
-        $this->assertEquals($C, $B);
+        $this->network = new KohonenNetwork([3, 2]);
     }
-    
+
+    protected function tearDown()
+    {
+        $this->network = null;
+    }
+
+    public function testConfiguration()
+    {
+        $this->assertCount(2, $this->network->getLayers());
+        $this->assertCount(2, $this->network->toLastLayer()->getNodes());
+        $this->assertCount(3, $this->network->getLayers()[0]->getNodes());
+    }
+
+    public function testSynapses()
+    {
+        $this->network->generateSynapses();
+
+        $this->assertCount(3, $this->network->toLastLayer()->getNodes()[0]->getSynapses());
+    }
+
+    public function testOutput()
+    {
+        $this->network->generateSynapses();
+
+        $this->assertCount(2, $this->network->output());
+        $this->assertEquals(1, array_sum($this->network->output()));
+    }
+
 }
