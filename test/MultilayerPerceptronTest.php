@@ -91,7 +91,7 @@ class MultilayerPerceptronTest extends PHPUnit_Framework_TestCase
                 10000
             );
 
-            if($learningResult == -1)
+            if($learningResult == BackpropagationTeacher::INEFFECTUALLY_LEARN)
                 continue;
 
             $this->assertEquals(1.0, $mlp->input([1, 0])->output()[0], '', 0.3);

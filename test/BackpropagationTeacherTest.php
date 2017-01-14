@@ -29,7 +29,7 @@ class BackpropagationTeacherTest extends PHPUnit_Framework_TestCase
         $this->teacher->teachKit([1], [1, 2]);
     }
 
-    public function testUnsuccessful()
+    public function testIneffectuallyLearn()
     {
         $result = $this->teacher->teachKit(
             [[1, 0], [0, 1], [1, 1], [0, 0]], //kit for learning
@@ -38,6 +38,6 @@ class BackpropagationTeacherTest extends PHPUnit_Framework_TestCase
             10 //max iterations
         );
 
-        $this->assertEquals(-1, $result);
+        $this->assertEquals(BackpropagationTeacher::INEFFECTUALLY_LEARN, $result);
     }
 }

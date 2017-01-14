@@ -11,6 +11,8 @@ use Neural\Node\Neuron;
 class BackpropagationTeacher implements ITeacher
 {
 
+    const INEFFECTUALLY_LEARN = -1;
+
     /**
      * @var float
      */
@@ -99,13 +101,13 @@ class BackpropagationTeacher implements ITeacher
             }
 
         }
-        return -1;
+        return self::INEFFECTUALLY_LEARN;
     }
 
     private static function isTrueResult($result, $expectation, $error)
     {
         foreach ($expectation as $key => $true) {
-            if ($result[$key] > $true + $error || $result[$key] < $true - $error) {
+            if(abs($result[$key] - $true) > $error) {
                 return false;
             }
         }

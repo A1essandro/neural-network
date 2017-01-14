@@ -20,7 +20,7 @@ $learningResult = $t->teachKit(
     10000 //max iterations
 );
 
-if ($learningResult != -1) {
+if ($learningResult != BackpropagationTeacher::INEFFECTUALLY_LEARN) {
     echo '1,0: ' . round($p->input([1, 0])->output()[0]) . PHP_EOL;
     echo '0,1: ' . round($p->input([0, 1])->output()[0]) . PHP_EOL;
     echo '0,0: ' . round($p->input([0, 0])->output()[0]) . PHP_EOL;

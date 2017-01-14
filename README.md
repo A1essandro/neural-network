@@ -27,6 +27,7 @@ Or add line to `composer.json`
 
 ```
 "require": {
+    ...
     "require a1essandro/neural-network": "^0.1.0"
 },
 ```
