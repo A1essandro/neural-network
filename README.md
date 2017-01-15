@@ -6,16 +6,22 @@
 [![Latest Stable Version](https://poser.pugx.org/a1essandro/neural-network/v/stable)](https://packagist.org/packages/a1essandro/neural-network) 
 [![Latest Unstable Version](https://poser.pugx.org/a1essandro/neural-network/v/unstable)](https://packagist.org/packages/a1essandro/neural-network)
 [![Total Downloads](https://poser.pugx.org/a1essandro/neural-network/downloads)](https://packagist.org/packages/a1essandro/neural-network)
-[![License](https://poser.pugx.org/a1essandro/neural-network/license)](https://packagist.org/packages/a1essandro/neural-network)
+[![License](https://poser.pugx.org/a1essandro/neural-network/license)](https://github.com/A1essandro/neural-network/blob/master/LICENSE)
 
 ######Language choice:
 [![English](https://img.shields.io/:readme-EN-336699.svg)](https://github.com/A1essandro/neural-network/blob/master/README.md)
 [![Russian](https://img.shields.io/:readme-RU-cc3300.svg)](https://github.com/A1essandro/neural-network/blob/master/README.ru.md)
 
-##Requirements
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage examples](#usage)
+- [Contribute](#contribute)
+- [License](#license)
+
+## Requirements
 This package is only supported on PHP 5.5 and above.
 
-##Installing
+## Installation
 ####Method #1(recommended): Composer package
 See more [getcomposer.org](http://getcomposer.org).
 
@@ -38,7 +44,7 @@ Execute command
 git clone https://github.com/A1essandro/neural-network
 ```
 
-##Usage
+## Usage
 
 ####XOR example:
 
@@ -112,3 +118,11 @@ $secondLayerNeuron->addSynapse(new Synapse($input));
 
 //and so on...
 ```
+
+## Contribute
+
+Contributions to the package are always welcome!
+
+## License
+
+The code base is licensed under the MIT license.
