@@ -15,6 +15,13 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage examples](#usage)
+    - [XOR example](#xor-example)
+    - [Manually configuration](#manually-configuration-of-network)
+- [Specification](#specification)
+    - [Network](#network)
+    - [Layers](#layers)
+    - [Nodes](#nodes)
+    - [Synapses](#synapses)
 - [Contribute](#contribute)
 - [License](#license)
 
@@ -45,6 +52,8 @@ git clone https://github.com/A1essandro/neural-network
 ```
 
 ## Usage
+
+### Common
 
 ####XOR example:
 
@@ -118,6 +127,26 @@ $secondLayerNeuron->addSynapse(new Synapse($input));
 
 //and so on...
 ```
+
+##Specification
+
+####Network
+
+`INetwork` interface implementation is a container comprising nodes (`INode`) interconnected by synapses (`Synapse`).
+
+####Layers
+
+`ILayer` interface implementation are formal groups of `INode` in a `LayeredNetwork`.
+
+####Nodes
+
+`INode` - neurons, input-neurons etc.
+
+####Synapses
+
+`Synapse` - is a connection between two nodes (`INode`). Synapse takes the result (call `output()`) of leading node 
+(implementation INode interface), it output is handled by the `IActivationFunction`, 
+the result is transmitted to the slave node.
 
 ## Contribute
 
