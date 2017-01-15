@@ -17,6 +17,10 @@ class KohonenNeuron extends Neuron
      */
     public function output()
     {
+        if ($this->calculatedOutput !== 0) {
+            return $this->calculatedOutput;
+        }
+
         $pre = 0;
         foreach ($this->synapses as $synapse) {
             $weight = $synapse->getWeight();
@@ -26,7 +30,7 @@ class KohonenNeuron extends Neuron
         }
         $euclid = sqrt($pre);
 
-        return $this->activationFunction->calculateValue($euclid);
+        return $this->calculatedOutput = $this->activationFunction->calculateValue($euclid);
     }
 
 }
