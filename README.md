@@ -132,11 +132,11 @@ $secondLayerNeuron->addSynapse(new Synapse($input));
 
 ####Network
 
-`INetwork` interface implementation is a container comprising nodes (`INode`) interconnected by synapses (`Synapse`).
+Interface implementation of `INetwork` is a container comprising nodes (`INode`) interconnected by synapses (`Synapse`).
 
 ####Layers
 
-`ILayer` interface implementation are formal groups of `INode` in a `LayeredNetwork`.
+Interface implementations of `ILayer` are formal groups of `INode` in a `LayeredNetwork`.
 
 ####Nodes
 
