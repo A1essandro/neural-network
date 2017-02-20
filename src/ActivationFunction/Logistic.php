@@ -24,7 +24,7 @@ class Logistic implements IActivationFunction
      *
      * @return number
      */
-    function calculateValue($value)
+    function __invoke($value)
     {
         return 1 / (1 + exp(-$this->param * $value));
     }

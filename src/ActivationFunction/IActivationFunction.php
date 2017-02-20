@@ -7,10 +7,12 @@ interface IActivationFunction
 {
 
     /**
+     * Formal possibility to execute object as function.
+     *
      * @param number $value
      *
      * @return number
      */
-    function calculateValue($value);
+    function __invoke($value);
 
 }

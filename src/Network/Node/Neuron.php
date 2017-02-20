@@ -67,7 +67,7 @@ class Neuron implements INode
         foreach ($this->synapses as $synapse) {
             $sum += $synapse->output();
         }
-        return $this->calculatedOutput = $this->activationFunction->calculateValue($sum);
+        return $this->calculatedOutput = $this->activationFunction->__invoke($sum);
     }
 
     public function refresh()

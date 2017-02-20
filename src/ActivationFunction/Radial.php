@@ -11,7 +11,7 @@ class Radial implements IActivationFunction
      *
      * @return number
      */
-    public function calculateValue($value)
+    public function __invoke($value)
     {
         return exp(-pow($value, 2) / 2);
     }

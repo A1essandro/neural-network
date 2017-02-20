@@ -30,7 +30,7 @@ class KohonenNeuron extends Neuron
         }
         $euclid = sqrt($pre);
 
-        return $this->calculatedOutput = $this->activationFunction->calculateValue($euclid);
+        return $this->calculatedOutput = $this->activationFunction->__invoke($euclid);
     }
 
 }
