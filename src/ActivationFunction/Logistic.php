@@ -20,11 +20,10 @@ class Logistic implements IActivationFunction
     }
 
     /**
-     * @param number $value
-     *
-     * @return number
+     * @param float $value
+     * @return float
      */
-    function __invoke($value)
+    function __invoke(float $value): float
     {
         return 1 / (1 + exp(-$this->param * $value));
     }

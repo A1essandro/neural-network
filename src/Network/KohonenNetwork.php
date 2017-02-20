@@ -5,9 +5,9 @@ namespace Neural\Network;
 
 use Neural\Learning\ISelfLearning;
 use Neural\Network\Layer\Layer;
-use Neural\Network\Node\Input;
-use Neural\Network\Node\KohonenNeuron;
-use Neural\Network\Node\Neuron;
+use Neural\Network\Node\{
+    Input, KohonenNeuron, Neuron
+};
 use Neural\Network\Synapse\Synapse;
 
 class KohonenNetwork extends LayeredNetwork implements ISelfLearning
@@ -42,24 +42,6 @@ class KohonenNetwork extends LayeredNetwork implements ISelfLearning
         }
     }
 
-    public function output()
-    {
-        $outputCount = count($this->getOutputLayer()->getNodes());
-        $max = -$outputCount;
-        $maxIndex = -1;
-
-        foreach ($this->getOutputLayer()->getNodes() as $index => $node) {
-            if ($node->output() >= $max) {
-                $maxIndex = $index;
-                $max = $node->output();
-            }
-        }
-
-        $result = array_fill(0, $outputCount, 0);
-        $result[$maxIndex] = 1;
-        return $result;
-    }
-
     public function learn(array $input)
     {
         $result = $this->input($input)->output();
@@ -78,6 +60,24 @@ class KohonenNetwork extends LayeredNetwork implements ISelfLearning
         foreach ($neuron->getSynapses() as $key => $synapse) {
             $synapse->changeWeight(0.15 * ($input[$key] - $synapse->getWeight()));
         }
+    }
+
+    public function output(): array
+    {
+        $outputCount = count($this->getOutputLayer()->getNodes());
+        $max = -$outputCount;
+        $maxIndex = -1;
+
+        foreach ($this->getOutputLayer()->getNodes() as $index => $node) {
+            if ($node->output() >= $max) {
+                $maxIndex = $index;
+                $max = $node->output();
+            }
+        }
+
+        $result = array_fill(0, $outputCount, 0);
+        $result[$maxIndex] = 1;
+        return $result;
     }
 
 }

@@ -15,7 +15,7 @@ class KohonenNeuron extends Neuron
      *
      * @return float
      */
-    public function output()
+    public function output(): float
     {
         if ($this->calculatedOutput !== 0) {
             return $this->calculatedOutput;

@@ -20,9 +20,9 @@ class Synapse implements ISynapse
 
     /**
      * @param INode $fromNode
-     * @param null|float $weight
+     * @param float|null $weight
      */
-    public function __construct(INode $fromNode, $weight = null)
+    public function __construct(INode $fromNode, ?float $weight = null)
     {
         $this->setWeight($weight);
         $this->parentNode = $fromNode;
@@ -31,7 +31,7 @@ class Synapse implements ISynapse
     /**
      * @return float
      */
-    public function output()
+    public function output(): float
     {
         return $this->weight * $this->parentNode->output();
     }
@@ -39,7 +39,7 @@ class Synapse implements ISynapse
     /**
      * @param float $delta
      */
-    public function changeWeight($delta)
+    public function changeWeight(float $delta)
     {
         $this->weight += $delta;
     }
@@ -47,7 +47,7 @@ class Synapse implements ISynapse
     /**
      * @return float
      */
-    public function getWeight()
+    public function getWeight(): float
     {
         return $this->weight;
     }
@@ -55,7 +55,7 @@ class Synapse implements ISynapse
     /**
      * @param float $weight
      */
-    public function setWeight($weight = null)
+    public function setWeight(float $weight = null)
     {
         $this->weight = $weight ?: $this->generateRandomWeight();
     }
@@ -63,7 +63,7 @@ class Synapse implements ISynapse
     /**
      * @return INode
      */
-    function getParentNode()
+    public function getParentNode(): INode
     {
         return $this->parentNode;
     }
@@ -71,7 +71,7 @@ class Synapse implements ISynapse
     /**
      * @return float
      */
-    protected function generateRandomWeight()
+    private function generateRandomWeight(): float
     {
         return 1 / rand(5, 25) * (rand(0, 1) ? -1 : 1);
     }

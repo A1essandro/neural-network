@@ -12,16 +12,16 @@ interface ISynapse extends IOutput
     /**
      * @param float $delta
      */
-    function changeWeight($delta);
+    function changeWeight(float $delta);
 
     /**
      * @return float
      */
-    function getWeight();
+    function getWeight(): float;
 
     /**
      * @return INode
      */
-    function getParentNode();
+    function getParentNode(): INode;
 
 }

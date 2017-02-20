@@ -22,6 +22,6 @@ interface ITeacher
      *
      * @return int Iterations performed (no results if -1)
      */
-    function teachKit(array $kit, array $expectations, $error = 0.5, $maxIterations = 10000);
+    function teachKit(array $kit, array $expectations, float $error = 0.5, int $maxIterations = 10000): int;
 
 }

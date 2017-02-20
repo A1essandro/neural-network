@@ -7,11 +7,10 @@ class Radial implements IActivationFunction
 {
 
     /**
-     * @param number $value
-     *
-     * @return number
+     * @param float $value
+     * @return float
      */
-    public function __invoke($value)
+    public function __invoke(float $value): float
     {
         return exp(-pow($value, 2) / 2);
     }
