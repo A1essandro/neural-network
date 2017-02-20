@@ -1,12 +1,12 @@
 <?php
 
-namespace Neural;
+namespace Neural\Learning;
 
 
 use Exception;
 use Neural\Abstraction\ILayer;
-use Neural\Abstraction\ITeacher;
-use Neural\Node\Neuron;
+use Neural\Network\MultilayerPerceptron;
+use Neural\Network\Node\Neuron;
 
 class BackpropagationTeacher implements ITeacher
 {
@@ -62,7 +62,7 @@ class BackpropagationTeacher implements ITeacher
 
     /**
      * @param NeuronsSigma[] $sigmas
-     * @param Neuron         $forNeuron
+     * @param Neuron $forNeuron
      *
      * @return float|int|null
      */
@@ -107,7 +107,7 @@ class BackpropagationTeacher implements ITeacher
     private static function isTrueResult($result, $expectation, $error)
     {
         foreach ($expectation as $key => $true) {
-            if(abs($result[$key] - $true) > $error) {
+            if (abs($result[$key] - $true) > $error) {
                 return false;
             }
         }

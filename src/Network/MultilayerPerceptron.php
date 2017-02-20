@@ -1,12 +1,13 @@
 <?php
 
-namespace Neural;
+namespace Neural\Network;
 
 
-use Neural\Abstraction\LayeredNetwork;
-use Neural\Node\Input;
-use Neural\Node\Neuron;
-use Neural\Node\Bias;
+use Neural\Network\Layer\Layer;
+use Neural\Network\Node\Bias;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\Neuron;
+use Neural\Network\Synapse\Synapse;
 
 class MultilayerPerceptron extends LayeredNetwork
 {
@@ -16,7 +17,7 @@ class MultilayerPerceptron extends LayeredNetwork
      */
     public function __construct(array $layersOptions = null)
     {
-        if(is_null($layersOptions)) {
+        if (is_null($layersOptions)) {
             return;
         }
 
@@ -42,7 +43,7 @@ class MultilayerPerceptron extends LayeredNetwork
 
     public function generateSynapses()
     {
-        $filterNotBias = function($node) {
+        $filterNotBias = function ($node) {
             return !$node instanceof Bias;
         };
 

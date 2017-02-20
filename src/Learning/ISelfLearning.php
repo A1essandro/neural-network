@@ -1,6 +1,6 @@
 <?php
 
-namespace Neural\Abstraction;
+namespace Neural\Learning;
 
 
 interface ISelfLearning

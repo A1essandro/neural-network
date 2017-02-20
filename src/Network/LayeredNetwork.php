@@ -1,12 +1,13 @@
 <?php
 
-namespace Neural\Abstraction;
+namespace Neural\Network;
 
 
 use Closure;
-use Neural\Node\INode;
-use Neural\Node\Input;
-use Neural\Node\Neuron;
+use Neural\Abstraction\ILayer;
+use Neural\Network\Node\INode;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\Neuron;
 
 abstract class LayeredNetwork implements INetwork
 {

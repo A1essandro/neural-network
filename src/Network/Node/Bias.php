@@ -1,6 +1,7 @@
 <?php
 
-namespace Neural\Node;
+namespace Neural\Network\Node;
+
 
 class Bias implements INode
 {

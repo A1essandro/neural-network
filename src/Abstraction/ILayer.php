@@ -4,11 +4,10 @@ namespace Neural\Abstraction;
 
 
 use Closure;
-use Generator;
-use Neural\Node\Bias;
-use Neural\Node\INode;
-use Neural\Node\Input;
-use Neural\Node\Neuron;
+use Neural\Network\Node\Bias;
+use Neural\Network\Node\INode;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\Neuron;
 
 interface ILayer
 {

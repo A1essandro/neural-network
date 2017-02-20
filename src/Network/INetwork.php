@@ -1,11 +1,13 @@
 <?php
 
-namespace Neural\Abstraction;
+namespace Neural\Network;
 
 
 use Closure;
-use Neural\Node\INode;
-use Neural\Node\Neuron;
+use Neural\Abstraction\IInput;
+use Neural\Abstraction\IOutput;
+use Neural\Network\Node\INode;
+use Neural\Network\Node\Neuron;
 
 interface INetwork extends IInput, IOutput
 {
@@ -18,6 +20,7 @@ interface INetwork extends IInput, IOutput
     function getNodes(Closure $filter = null);
 
     /**
+     * @param $input
      * @return $this
      */
     function input($input);

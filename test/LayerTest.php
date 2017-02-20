@@ -1,10 +1,11 @@
 <?php
 
+
 use Neural\Abstraction\ILayer;
-use Neural\Layer;
-use Neural\Node\Bias;
-use Neural\Node\INode;
-use Neural\Node\Neuron;
+use Neural\Network\Layer\Layer;
+use Neural\Network\Node\Bias;
+use Neural\Network\Node\INode;
+use Neural\Network\Node\Neuron;
 
 class LayerTest extends PHPUnit_Framework_TestCase
 {

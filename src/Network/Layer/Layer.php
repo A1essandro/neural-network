@@ -1,14 +1,15 @@
 <?php
 
-namespace Neural;
+namespace Neural\Network\Layer;
 
 
 use Closure;
 use Neural\Abstraction\ILayer;
-use Neural\Node\Bias;
-use Neural\Node\INode;
-use Neural\Node\Input;
-use Neural\Node\Neuron;
+use Neural\Network\Node\Bias;
+use Neural\Network\Node\INode;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\Neuron;
+
 
 class Layer implements ILayer
 {

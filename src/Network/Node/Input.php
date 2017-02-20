@@ -1,6 +1,6 @@
 <?php
 
-namespace Neural\Node;
+namespace Neural\Network\Node;
 
 
 use Neural\Abstraction\IInput;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Neural\Abstraction;
+namespace Neural\Learning;
 
 
 interface ITeacher
@@ -18,7 +18,7 @@ interface ITeacher
      * @param array $kit
      * @param array $expectations
      * @param float $error
-     * @param int   $maxIterations
+     * @param int $maxIterations
      *
      * @return int Iterations performed (no results if -1)
      */

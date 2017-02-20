@@ -1,13 +1,14 @@
 <?php
 
-namespace Neural;
+namespace Neural\Network;
 
 
-use Neural\Abstraction\ISelfLearning;
-use Neural\Abstraction\LayeredNetwork;
-use Neural\Node\Input;
-use Neural\Node\KohonenNeuron;
-use Neural\Node\Neuron;
+use Neural\Learning\ISelfLearning;
+use Neural\Network\Layer\Layer;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\KohonenNeuron;
+use Neural\Network\Node\Neuron;
+use Neural\Network\Synapse\Synapse;
 
 class KohonenNetwork extends LayeredNetwork implements ISelfLearning
 {

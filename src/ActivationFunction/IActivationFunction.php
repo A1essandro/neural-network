@@ -1,6 +1,6 @@
 <?php
 
-namespace Neural\Abstraction;
+namespace Neural\ActivationFunction;
 
 
 interface IActivationFunction

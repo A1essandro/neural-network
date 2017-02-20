@@ -1,9 +1,10 @@
 <?php
 
-namespace Neural\Abstraction;
+namespace Neural\Network\Synapse;
 
 
-use Neural\Node\INode;
+use Neural\Abstraction\IOutput;
+use Neural\Network\Node\INode;
 
 interface ISynapse extends IOutput
 {

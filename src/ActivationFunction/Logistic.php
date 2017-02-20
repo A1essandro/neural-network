@@ -1,11 +1,9 @@
 <?php
 
-namespace Neural;
+namespace Neural\ActivationFunction;
 
 
-use Neural\Abstraction\IActivationFunction;
-
-class LogisticFunction implements IActivationFunction
+class Logistic implements IActivationFunction
 {
 
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Neural\Node;
+namespace Neural\Network\Node;
 
 
-use Neural\Radial;
+use Neural\ActivationFunction\Radial;
 
 class KohonenNeuron extends Neuron
 {

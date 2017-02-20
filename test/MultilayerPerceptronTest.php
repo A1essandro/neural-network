@@ -1,11 +1,12 @@
 <?php
 
-use Neural\BackpropagationTeacher;
-use Neural\Layer;
-use Neural\MultilayerPerceptron;
-use Neural\Node\Bias;
-use Neural\Node\Input;
-use Neural\Node\Neuron;
+
+use Neural\Learning\BackpropagationTeacher;
+use Neural\Network\Layer\Layer;
+use Neural\Network\MultilayerPerceptron;
+use Neural\Network\Node\Bias;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\Neuron;
 
 class MultilayerPerceptronTest extends PHPUnit_Framework_TestCase
 {

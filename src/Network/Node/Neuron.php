@@ -1,12 +1,12 @@
 <?php
 
-namespace Neural\Node;
+namespace Neural\Network\Node;
 
 
-use Neural\Abstraction\IActivationFunction;
-use Neural\Abstraction\ISynapse;
-use Neural\LogisticFunction;
-use Neural\Synapse;
+use Neural\ActivationFunction\IActivationFunction;
+use Neural\ActivationFunction\Logistic;
+use Neural\Network\Synapse\ISynapse;
+use Neural\Network\Synapse\Synapse;
 
 class Neuron implements INode
 {
@@ -26,7 +26,7 @@ class Neuron implements INode
      */
     protected $calculatedOutput = 0;
 
-    const DEFAULT_ACTIVATION_FUNCTION = LogisticFunction::class;
+    const DEFAULT_ACTIVATION_FUNCTION = Logistic::class;
 
     /**
      * @param IActivationFunction|null $activation

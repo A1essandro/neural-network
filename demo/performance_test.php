@@ -1,7 +1,8 @@
 <?php
 
-use Neural\BackpropagationTeacher;
-use Neural\MultilayerPerceptron;
+
+use Neural\Learning\BackpropagationTeacher;
+use Neural\Network\MultilayerPerceptron;
 
 require_once '../vendor/autoload.php';
 

@@ -1,7 +1,7 @@
 <?php
 
-use Neural\BackpropagationTeacher;
-use Neural\MultilayerPerceptron;
+use Neural\Learning\BackpropagationTeacher;
+use Neural\Network\MultilayerPerceptron;
 
 class BackpropagationTeacherTest extends PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class BackpropagationTeacherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \Exception
      */
     public function testException()
     {

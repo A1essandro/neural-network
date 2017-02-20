@@ -1,12 +1,13 @@
 <?php
 
-use Neural\Abstraction\ISynapse;
-use Neural\Layer;
-use Neural\LogisticFunction;
-use Neural\MultilayerPerceptron;
-use Neural\Node\Input;
-use Neural\Node\Neuron;
-use Neural\Synapse;
+
+use Neural\ActivationFunction\Logistic;
+use Neural\Network\Layer\Layer;
+use Neural\Network\MultilayerPerceptron;
+use Neural\Network\Node\Input;
+use Neural\Network\Node\Neuron;
+use Neural\Network\Synapse\ISynapse;
+use Neural\Network\Synapse\Synapse;
 
 class NeuronTest extends PHPUnit_Framework_TestCase
 {
@@ -29,8 +30,8 @@ class NeuronTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->inputNode = new Input();
-        $this->masterNeuron = new Neuron(new LogisticFunction());
-        $this->slaveNeuron = new Neuron(new LogisticFunction());
+        $this->masterNeuron = new Neuron(new Logistic());
+        $this->slaveNeuron = new Neuron(new Logistic());
     }
 
     protected function tearDown()

@@ -1,6 +1,7 @@
 <?php
 
-use Neural\Node\Bias;
+
+use Neural\Network\Node\Bias;
 
 class BiasTest extends PHPUnit_Framework_TestCase
 {

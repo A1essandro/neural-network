@@ -1,6 +1,7 @@
 <?php
 
-use Neural\KohonenNetwork;
+
+use Neural\Network\KohonenNetwork;
 
 class KohonenNetworkTest extends PHPUnit_Framework_TestCase
 {

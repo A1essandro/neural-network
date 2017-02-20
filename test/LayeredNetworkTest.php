@@ -1,7 +1,8 @@
 <?php
 
-use Neural\Abstraction\LayeredNetwork;
-use Neural\Layer;
+
+use Neural\Network\Layer\Layer;
+use Neural\Network\LayeredNetwork;
 
 class LayeredNetworkTest extends PHPUnit_Framework_TestCase
 {
