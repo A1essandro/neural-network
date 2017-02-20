@@ -22,7 +22,7 @@ class Synapse implements ISynapse
      * @param INode $fromNode
      * @param float|null $weight
      */
-    public function __construct(INode $fromNode, ?float $weight = null)
+    public function __construct(INode $fromNode, float $weight = null)
     {
         $this->setWeight($weight);
         $this->parentNode = $fromNode;
