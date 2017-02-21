@@ -5,10 +5,9 @@ namespace Neural\Network\Layer;
 
 use Closure;
 use Neural\Abstraction\ILayer;
-use Neural\Network\Node\Bias;
-use Neural\Network\Node\INode;
-use Neural\Network\Node\Input;
-use Neural\Network\Node\Neuron;
+use Neural\Network\Node\{
+    Bias, INode, Input, Neuron
+};
 
 
 class Layer implements ILayer
@@ -16,7 +15,7 @@ class Layer implements ILayer
 
     protected $nodes = [];
 
-    public function __construct($neurons = 0, $nodeTypes = Neuron::class)
+    public function __construct(int $neurons = 0, $nodeTypes = Neuron::class)
     {
         for ($i = 0; $i < $neurons; $i++) {
             $this->nodes[] = new $nodeTypes();
@@ -26,9 +25,9 @@ class Layer implements ILayer
     /**
      * @param INode $node
      *
-     * @return $this
+     * @return $this|Layer
      */
-    public function addNode(INode $node)
+    public function addNode(INode $node): Layer
     {
         $this->nodes[] = $node;
 
@@ -40,7 +39,7 @@ class Layer implements ILayer
      *
      * @return INode[]|Neuron[]|Input[]|Bias[]
      */
-    public function getNodes(Closure $filter = null)
+    public function getNodes(Closure $filter = null): array
     {
         if ($filter) {
             return array_filter($this->nodes, $filter);
@@ -52,7 +51,7 @@ class Layer implements ILayer
     /**
      * @return INode
      */
-    public function toLastNode()
+    public function toLastNode(): INode
     {
         return end($this->nodes);
     }

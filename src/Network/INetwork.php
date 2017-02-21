@@ -4,10 +4,12 @@ namespace Neural\Network;
 
 
 use Closure;
-use Neural\Abstraction\IInput;
-use Neural\Abstraction\IOutput;
-use Neural\Network\Node\INode;
-use Neural\Network\Node\Neuron;
+use Neural\Abstraction\{
+    IInput, IOutput
+};
+use Neural\Network\Node\{
+    INode, Neuron
+};
 
 interface INetwork extends IInput, IOutput
 {
@@ -17,7 +19,7 @@ interface INetwork extends IInput, IOutput
      *
      * @return INode[]|Neuron[]
      */
-    function getNodes(Closure $filter = null);
+    function getNodes(Closure $filter = null): array;
 
     /**
      * @param $input

@@ -9,10 +9,10 @@ interface IActivationFunction
     /**
      * Formal possibility to execute object as function.
      *
-     * @param number $value
+     * @param float $value
      *
-     * @return number
+     * @return float
      */
-    function __invoke($value);
+    function __invoke(float $value): float;
 
 }

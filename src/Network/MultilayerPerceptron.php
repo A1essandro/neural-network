@@ -4,9 +4,9 @@ namespace Neural\Network;
 
 
 use Neural\Network\Layer\Layer;
-use Neural\Network\Node\Bias;
-use Neural\Network\Node\Input;
-use Neural\Network\Node\Neuron;
+use Neural\Network\Node\{
+    Bias, Input, Neuron
+};
 use Neural\Network\Synapse\Synapse;
 
 class MultilayerPerceptron extends LayeredNetwork

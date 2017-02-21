@@ -23,63 +23,21 @@ class BackpropagationTeacher implements ITeacher
      */
     protected $perceptron;
 
-    public function __construct(MultilayerPerceptron $perceptron, $theta = 1)
+    public function __construct(MultilayerPerceptron $perceptron, float $theta = 1.0)
     {
         $this->perceptron = $perceptron;
         $this->theta = $theta;
     }
 
-    public function teach(array $input, array $expectation)
-    {
-        $this->perceptron->input($input)->output();
-        $nFilter = function ($node) {
-            return $node instanceof Neuron;
-        };
-
-        $childLayer = null;
-        $sigmas = [];
-
-        /** @var ILayer $layer */
-        foreach (array_reverse($this->perceptron->getLayers()) as $layer) {
-            if ($this->perceptron->getLayers()[0] == $layer) {
-                continue;
-            }
-            foreach ($layer->getNodes($nFilter) as $nk => $neuron) {
-                $neuronOutput = $neuron->output();
-                $sigma = !empty($childLayer)
-                    ? $neuronOutput * (1 - $neuronOutput) * $this->getChildSigmas($sigmas, $neuron)
-                    : $neuronOutput * (1 - $neuronOutput) * ($expectation[$nk] - $neuronOutput);
-                $sigmas[] = new NeuronsSigma($neuron, $sigma);
-                foreach ($neuron->getSynapses() as $synapse) {
-                    $synapse->changeWeight($this->theta * $sigma * $synapse->getParentNode()->output());
-                }
-            }
-
-            $childLayer = $layer;
-        }
-
-    }
-
     /**
-     * @param NeuronsSigma[] $sigmas
-     * @param Neuron $forNeuron
-     *
-     * @return float|int|null
+     * @param array $kit
+     * @param array $expectations
+     * @param float $error
+     * @param int $maxIterations
+     * @return int
+     * @throws Exception
      */
-    private function getChildSigmas($sigmas, $forNeuron)
-    {
-        $sigma = 0;
-        foreach ($sigmas as $neuronWithSigma) {
-            foreach ($neuronWithSigma->neuron->getSynapses() as $synapse) {
-                if ($synapse->getParentNode() == $forNeuron) {
-                    $sigma += $synapse->getWeight() * $neuronWithSigma->sigma;
-                }
-            }
-        }
-        return $sigma;
-    }
-
-    public function teachKit(array $kit, array $expectations, $error = 0.3, $maxIterations = 10000)
+    public function teachKit(array $kit, array $expectations, float $error = 0.3, int $maxIterations = 10000): int
     {
         if (count($kit) != count($expectations)) {
             throw new Exception("Kit and expectations quantities must be equals");
@@ -112,6 +70,55 @@ class BackpropagationTeacher implements ITeacher
             }
         }
         return true;
+    }
+
+    public function teach(array $input, array $expectation)
+    {
+        $this->perceptron->input($input)->output();
+        $nFilter = function ($node) {
+            return $node instanceof Neuron;
+        };
+
+        $childLayer = null;
+        $sigmas = [];
+
+        /** @var ILayer $layer */
+        foreach (array_reverse($this->perceptron->getLayers()) as $layer) {
+            if ($this->perceptron->getLayers()[0] == $layer) {
+                continue;
+            }
+            foreach ($layer->getNodes($nFilter) as $nk => $neuron) {
+                $neuronOutput = $neuron->output();
+                $sigma = !empty($childLayer)
+                    ? $neuronOutput * (1 - $neuronOutput) * $this->getChildSigmas($sigmas, $neuron)
+                    : $neuronOutput * (1 - $neuronOutput) * ($expectation[$nk] - $neuronOutput);
+                $sigmas[] = new NeuronsSigma($neuron, $sigma);
+                foreach ($neuron->getSynapses() as $synapse) {
+                    $synapse->changeWeight($this->theta * $sigma * $synapse->getParentNode()->output());
+                }
+            }
+
+            $childLayer = $layer;
+        }
+    }
+
+    /**
+     * @param NeuronsSigma[] $sigmas
+     * @param Neuron $forNeuron
+     *
+     * @return float
+     */
+    private function getChildSigmas(array $sigmas, Neuron $forNeuron): float
+    {
+        $sigma = 0;
+        foreach ($sigmas as $neuronWithSigma) {
+            foreach ($neuronWithSigma->neuron->getSynapses() as $synapse) {
+                if ($synapse->getParentNode() == $forNeuron) {
+                    $sigma += $synapse->getWeight() * $neuronWithSigma->sigma;
+                }
+            }
+        }
+        return $sigma;
     }
 
 }

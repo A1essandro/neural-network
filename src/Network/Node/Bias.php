@@ -6,7 +6,7 @@ namespace Neural\Network\Node;
 class Bias implements INode
 {
 
-    function output()
+    function output(): int
     {
         return 1;
     }

@@ -11,22 +11,19 @@ use Neural\Network\Synapse\Synapse;
 class Neuron implements INode
 {
 
+    const DEFAULT_ACTIVATION_FUNCTION = Logistic::class;
     /**
      * @var Synapse[]
      */
     protected $synapses = [];
-
     /**
      * @var IActivationFunction
      */
     protected $activationFunction;
-
     /**
      * @var float
      */
     protected $calculatedOutput = 0;
-
-    const DEFAULT_ACTIVATION_FUNCTION = Logistic::class;
 
     /**
      * @param IActivationFunction|null $activation
@@ -52,12 +49,15 @@ class Neuron implements INode
      *
      * @return ISynapse[]
      */
-    public function getSynapses()
+    public function getSynapses(): array
     {
         return $this->synapses;
     }
 
-    public function output()
+    /**
+     * @return float
+     */
+    public function output(): float
     {
         if ($this->calculatedOutput !== 0) {
             return $this->calculatedOutput;
