@@ -19,5 +19,10 @@
     "psr-4": {
       "Neural\\": "src/"
     }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "v0.2.x-dev"
+    }
   }
 }
