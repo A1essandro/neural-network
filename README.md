@@ -1,4 +1,4 @@
-#neural-network
+# neural-network
 
 [![Build Status](https://travis-ci.org/A1essandro/neural-network.svg?branch=master)](https://travis-ci.org/A1essandro/neural-network)
 [![Coverage Status](https://coveralls.io/repos/github/A1essandro/neural-network/badge.svg?branch=master)](https://coveralls.io/github/A1essandro/neural-network?branch=master)
@@ -8,7 +8,7 @@
 [![Total Downloads](https://poser.pugx.org/a1essandro/neural-network/downloads)](https://packagist.org/packages/a1essandro/neural-network)
 [![License](https://poser.pugx.org/a1essandro/neural-network/license)](https://github.com/A1essandro/neural-network/blob/master/LICENSE)
 
-######Language choice:
+###### Language choice:
 [![English](https://img.shields.io/:readme-EN-336699.svg)](https://github.com/A1essandro/neural-network/blob/master/README.md)
 [![Russian](https://img.shields.io/:readme-RU-cc3300.svg)](https://github.com/A1essandro/neural-network/blob/master/README.ru.md)
 
@@ -29,7 +29,7 @@
 This package is only supported on PHP 5.5 and above.
 
 ## Installation
-####Method #1(recommended): Composer package
+#### Method #1(recommended): Composer package
 See more [getcomposer.org](http://getcomposer.org).
 
 Execute command 
@@ -45,7 +45,7 @@ Or add line to `composer.json`
 },
 ```
 
-####Method #2: Clone repository
+#### Method #2: Clone repository
 Execute command 
 ```
 git clone https://github.com/A1essandro/neural-network
@@ -55,7 +55,7 @@ git clone https://github.com/A1essandro/neural-network
 
 ### Common
 
-####XOR example:
+#### XOR example:
 
 ```php
 use Neural\BackpropagationTeacher;
@@ -92,7 +92,7 @@ if ($learningResult != -1) {
 */
 ```
 
-####Manually configuration of network
+#### Manually configuration of network
 
 ```php
 $p = new MultilayerPerceptron([2, 2, 1]);
@@ -128,21 +128,21 @@ $secondLayerNeuron->addSynapse(new Synapse($input));
 //and so on...
 ```
 
-##Specification
+## Specification
 
-####Network
+#### Network
 
 Interface implementation of `INetwork` is a container comprising nodes (`INode`) interconnected by synapses (`Synapse`).
 
-####Layers
+#### Layers
 
 Interface implementations of `ILayer` are formal groups of `INode` in a `LayeredNetwork`.
 
-####Nodes
+#### Nodes
 
 `INode` - neurons, input-neurons etc.
 
-####Synapses
+#### Synapses
 
 `Synapse` - is a connection between two nodes (`INode`). Synapse takes the result (call `output()`) of leading node 
 (implementation INode interface), it output is handled by the `IActivationFunction`, 
