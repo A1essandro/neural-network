@@ -144,9 +144,7 @@ Interface implementations of `ILayer` are formal groups of `INode` in a `Layered
 
 #### Synapses
 
-`Synapse` - is a connection between two nodes (`INode`). Synapse takes the result (call `output()`) of leading node 
-(implementation INode interface), it output is handled by the `IActivationFunction`, 
-the result is transmitted to the slave node.
+`Synapse` - is a connection between two nodes (`INode`). Synapse gets output (call `output()`) of neuron-transmitter and convert the value via its weight. Result value gets neuron-reciever (it call `output()` of `ISynapse`).
 
 ## Contribute
 
